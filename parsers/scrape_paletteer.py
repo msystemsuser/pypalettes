@@ -26,7 +26,7 @@ def get_paletteer_palettes():
             raise ValueError("Palette section is missing a string id")
         first_kind = section_id.split("-")[0]
 
-        sub_sections = soup.find_all("section", class_="level3")
+        sub_sections = section.find_all("section", class_="level3")
 
         # iterate over each sub_section found
         for sub_section in sub_sections:
@@ -59,19 +59,19 @@ def get_paletteer_palettes():
                 )
                 paletteer_kinds.append(paletteer_kind)
 
-        # create pandas df with palette properties
-        df = pd.DataFrame(
-            {
-                "name": names,
-                "palette": palettes,
-                "source": sources,
-                "kind": kinds,
-                "paletteer-kind": paletteer_kinds,
-            }
-        )
+    # create pandas df with palette properties
+    df = pd.DataFrame(
+        {
+            "name": names,
+            "palette": palettes,
+            "source": sources,
+            "kind": kinds,
+            "paletteer-kind": paletteer_kinds,
+        }
+    )
 
-        print(f"Paletteer parsing finished with: {len(palettes)} palettes found")
-        return df
+    print(f"Paletteer parsing finished with: {len(palettes)} palettes found")
+    return df
 
 
 if __name__ == "__main__":
